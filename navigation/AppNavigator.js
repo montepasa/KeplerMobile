@@ -3,6 +3,7 @@ import { createSwitchNavigator, createStackNavigator} from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
 import LoginScreen from '../screens/LoginScreen';
+import DashboardScreen from '../screens/DashboardScreen';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 const LoginStack = createStackNavigator({ Login: LoginScreen });
 export default createSwitchNavigator({
@@ -11,6 +12,7 @@ export default createSwitchNavigator({
   AuthLoading: AuthLoadingScreen,
   Main: MainTabNavigator,
   Login : LoginStack,
+  Dashboard: DashboardScreen,
 },
 {
   initialRouteName: 'AuthLoading',

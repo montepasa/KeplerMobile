@@ -31,11 +31,12 @@ export default class DashboardScreen extends React.Component {
   state = { name: '', email: '', password: '', errorMessage: null }
   constructor(props) {
     super(props);
+    console.log("**4***");
+    AsyncStorage.removeItem("Login");
   }
   static navigationOptions = {
     header: null,
   };
-
   render() {
     return (
         <View style={styles.container}>

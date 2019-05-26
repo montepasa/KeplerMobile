@@ -12,7 +12,7 @@ import {
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
-let userToken = true;
+var userToken = null;
 
 export default class AuthLoadingScreen extends React.Component {
 
@@ -27,9 +27,13 @@ export default class AuthLoadingScreen extends React.Component {
     };
 
     _bootstrapAsync = async () => {
-        //const userToken = await AsyncStorage.getItem('userToken');
-        this.props.navigation.navigate(userToken ? 'Login' : 'Login');
-    };i
+        console.log("**3***", )
+        userToken = await AsyncStorage.getItem('Login');
+        //console.log("userrtoken", userToken);
+        console.log("**3***", userToken);
+        this.props.navigation.navigate( userToken == null ? 'Login' : 'Dashboard');
+
+    };
     render() {
         return (
             //Buraya güzel bir loading ekranı koyabilirsin

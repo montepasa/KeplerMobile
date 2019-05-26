@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 import {
   Image,
@@ -13,17 +15,12 @@ import {
   TouchableHighlight,
   ImageBackground
 } from 'react-native';
-import { userLogin } from '../service/Firebase';
-import PropTypes from 'prop-types';
-import { WebBrowser } from 'expo';
 import { w, h, totalSize } from '../components/Dimensions';
 import InputField from "../components/InputField";
-import { MonoText } from '../components/StyledText';
+import User from '../repository/UserRepository';
 const mottoLogo = require('../assets/images/motto.png');
 const email = require('../assets/images/email.png');
 const password = require('../assets/images/password.png');
-const person = require('../assets/images/person.png');
-const repeat = require('../assets/images/repeat.png');
 
 
 
@@ -34,8 +31,22 @@ export default class LoginScreen extends React.Component {
   }
   static navigationOptions = {
     header: null,
-  };
-
+  }
+   login = async (email, password)=>{
+    console.log("**15**");
+    var item = User.login(email, password).then((response) => {
+      console.log("response'u yazdırıyoruz", response.email);
+      console.log("**16**");
+    });
+    console.log("item then");
+  }
+  componentDidMount(){
+    console.log("**10**");
+  }
+  componentDidUpdate(){
+    console.log("**11**");
+  }
+  
   render() {
     return (
       <ImageBackground source={require('../assets/images/people.jpg')} style={{ width: '100%', height: '100%' }}>
@@ -44,6 +55,7 @@ export default class LoginScreen extends React.Component {
           <InputField
             placeholder="Email"
             keyboardType="email-address"
+            returnKeyType={ "next" }
             style={styles.email}
             error={this.state.isEmailCorrect}
             focus={this.changeInputFocus}
@@ -52,7 +64,7 @@ export default class LoginScreen extends React.Component {
           />
           <InputField
             placeholder="Password"
-            returnKeyType="done"
+            returnKeyType={ "next" }
             secureTextEntry={true}
             blurOnSubmit={true}
             error={this.state.isPasswordCorrect}
@@ -60,7 +72,7 @@ export default class LoginScreen extends React.Component {
             focus={this.changeInputFocus}
             icon={password}
           />
-          <TouchableHighlight  underlayColor="#48bbec" activeOpacity={0.6} style={styles.button} onPress={() => userLogin(this.email.getInputValue(), this.password.getInputValue())}>
+          <TouchableHighlight  underlayColor="#48bbec" activeOpacity={0.6} style={styles.button} onPress={() => this.login(this.email.getInputValue(), this.password.getInputValue())}>
             <Text style={styles.buttonText}>
               Login
         </Text>
